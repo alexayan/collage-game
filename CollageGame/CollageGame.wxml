@@ -1,0 +1,5 @@
+<view class="collage-game {{showTip ? 'show-tip' : ''}}" bindtap="click" wx:if="{{blocks.length > 0}}" style="{{gameStyle}}">
+  <view wx:for="{{blocks}}" wx:key="{{index}}" class="block {{item.isLast && !isEnd ? 'blank' : ''}}" style="{{item.style}}" animation="{{item.animation}}" data-id="{{item.id}}">
+    <text class="tip" data-id="{{item.id}}">{{item.id}}</text>
+  </view>
+</view>

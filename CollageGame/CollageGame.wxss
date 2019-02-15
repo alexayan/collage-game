@@ -1,0 +1,43 @@
+.collage-game {
+  position: relative;
+  background: #fafafa;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start
+}
+
+.collage-game.show-tip .tip {
+  opacity: 1
+}
+
+.collage-game .tip {
+  opacity: 0;
+  color: #fd5068
+}
+
+.collage-game .block,
+.collage-game .blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  line-height: 100%;
+  z-index: 2;
+  flex: 0 0 auto
+}
+
+.collage-game .block {
+  background-repeat: no-repeat
+}
+
+.collage-game .blank {
+  background: #fafafa;
+  background-image: none !important;
+  z-index: 1
+}
+
+.collage-game .blank .tip {
+  opacity: 0 !important
+}
