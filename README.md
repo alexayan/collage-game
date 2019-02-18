@@ -18,6 +18,7 @@ width | Number | 300 | 版拼板宽度
 height| Number | 300 | 版拼板高度
 line | Number | 4 | 定义行数
 column | Number | 4 |定义列数
+padding | Number | 0 | 方块间距
 
 ## 组件事件
 

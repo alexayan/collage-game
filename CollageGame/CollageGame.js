@@ -141,14 +141,17 @@ Component({
           this.setData({
             isEnd: true
           });
-          this.triggerEvent("collagesuccess");
+          this.triggerEvent("collagesuccess", {}, {
+            bubbles: true,
+            composed: true
+          });
         }
       } catch (e) {
         console.error(e);
       }
     },
     refresh() {
-      const { image, width = 300, height = 300, line = 4, column = 4 } = (this.properties.meta || {});
+      const { image, width = 300, height = 300, line = 4, column = 4, padding = 0 } = (this.properties.meta || {});
       const matrix = genMatrix([line, column]);
       if (!width || !height || !matrix) {
         return;
@@ -157,8 +160,8 @@ Component({
       const rowCount = line;
       const columnCount = column;
       this.lastId = matrix[rowCount - 1][columnCount - 1];
-      const blockWidth = Math.floor(width / columnCount);
-      const blockHeight = Math.floor(height / rowCount);
+      const blockWidth = Math.floor((width - (columnCount + 1) * padding) / columnCount);
+      const blockHeight = Math.floor((height - (rowCount + 1) * padding) / rowCount);
       const blocks = [];
       const animation = wx.createAnimation({
         duration: 0
@@ -170,11 +173,12 @@ Component({
             id: matrix[i][j],
             width: blockWidth,
             height: blockHeight,
-            animation: animation.export()
+            animation: animation.export(),
+            padding: padding
           };
           const blockBoxStyle = `width: ${block.width}px; height: ${
             block.height
-          }px;`;
+          }px; margin: ${padding / 2}px;`;
           const blockBgStyle = `background-position: -${block.width *
             j}px -${block.height *
             i}px; background-size: ${width}px ${height}px; background-image: url('${image}');`;
@@ -291,9 +295,10 @@ Component({
             const animation = wx.createAnimation({
               duration: block.isLast ? 0 : animationTime
             });
+            console.log(pb[1] - pa[1], pb[0] - pa[0])
             animation
-              .translateX((pb[1] - pa[1]) * block.width)
-              .translateY((pb[0] - pa[0]) * block.height)
+              .translateX((pb[1] - pa[1]) * block.width + ((pb[1] - pa[1])) * block.padding)
+              .translateY((pb[0] - pa[0]) * block.height + ((pb[0] - pa[0])) * block.padding)
               .step();
             block.animation = animation.export();
           } else {
