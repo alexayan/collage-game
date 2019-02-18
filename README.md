@@ -21,7 +21,7 @@ column | Number | 4 |定义列数
 
 ## 组件事件
 
-`collage-success` : 拼贴完成触发
+`collagesuccess` : 拼贴完成触发
 
 ## 组件函数
 

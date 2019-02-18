@@ -141,7 +141,7 @@ Component({
           this.setData({
             isEnd: true
           });
-          this.triggerEvent("collage-success");
+          this.triggerEvent("collagesuccess");
         }
       } catch (e) {
         console.error(e);
